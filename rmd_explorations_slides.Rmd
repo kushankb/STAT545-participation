@@ -1,0 +1,27 @@
+---
+title: "Untitled"
+output: ioslides_presentation
+---
+
+
+```{r load, warning=FALSE, echo=FALSE}
+library(tibble)
+library(gapminder)
+library(DT)
+```
+<!--This is a comment-->
+
+
+#Print out gapminder data:
+```{r}
+gapminder
+```
+
+##Convert mtcars to a tibble, and wrap in datatable
+
+
+```{r}
+datatable(as_tibble(mtcars))
+# Can also use datable:: datable(as_tible)(mtcars)). This way, you do not need to load the package in the beginning and easier to read
+```
+
