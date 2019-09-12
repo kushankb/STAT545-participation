@@ -1,7 +1,7 @@
 ---
 title: "Tibble Exploration"
 output: html_document
-    theme: cerulean
+    
 ---
 ```{r load, warning=FALSE, echo=FALSE}
 library(tibble)
