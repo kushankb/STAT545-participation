@@ -85,7 +85,7 @@ Produce a line chart showing the concentration over time. Specifically, the plot
 Fill in the blanks to obtain the plot:
 
 ```{r, fig.width = 5, fig.height = 2}
-ggplot(mauna, aes(month, conc)) +
+p<- ggplot(mauna, aes(month, conc)) +
   geom_line()
 ```
 
@@ -100,7 +100,7 @@ The following code mistakenly puts the month variable on the y-axis. Fill in the
 
 ```{r, fig.width = 5, fig.height = 2}
 ggplot(mauna, aes(y = month)) +
-  geom_point(aes(FILL_THIS_IN))
+  geom_point(aes(conc,month))
 ```
 
 ### 2(c)
@@ -108,8 +108,9 @@ ggplot(mauna, aes(y = month)) +
 You can store the output of the plot in a variable, too. Store the plot from 2(a) in the variable named `p`, then add a layer to `p` that adds green points to the plot.
 
 ```{r, fig.width = 5, fig.height = 2}
+#Check!!!
 p +
-  FILL_THIS_IN(colour = FILL_THIS_IN)
+  geom_point(conc,month, colour = 'green')
 ```
 
 ### 2(d)
@@ -118,7 +119,7 @@ What's wrong with the following code? Fix it.
 
 ```{r, fig.width = 5, fig.height = 2}
 ggplot(gapminder) +
-  geom_point(x = gdpPercap, y = lifeExp, alpha = 0.1)
+  geom_point(aes(x = gdpPercap, y = lifeExp), alpha = 0.1)
 ```
 
 
@@ -132,7 +133,8 @@ So you're a ggplot2 pro? Then, let's see this plot adapted to polar coordinates.
 The plot should look like a spiral, or concentric circles. 
 
 ```{r, fig.width = 5, fig.height = 2}
-FILL_THIS_IN
+ggplot(mauna)+
+  geom_p
 ```
 
 
@@ -154,7 +156,8 @@ Fix this plot so that it shows life expectancy over time _for each country_.
 
 ```{r, fig.width = 5, fig.height = 2}
 ggplot(gapminder, aes(year, lifeExp)) +
-    geom_line()
+    geom_line()+
+  
 ```
 
 
