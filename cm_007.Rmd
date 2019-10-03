@@ -70,13 +70,6 @@ gapminder %>%
   knitr::kable()
 
 
-
-
-
-
-
-
-
 ```
 
 
