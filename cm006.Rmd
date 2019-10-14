@@ -1,6 +1,6 @@
 ---
 title: 'cm006: `dplyr` Exercise'
-output: html_notebook
+output: html_document
 editor_options: 
   chunk_output_type: inline
 ---
@@ -59,6 +59,8 @@ select(gapminder, -lifeExp)
 4. Put `continent` first. Hint: use the `everything()` function.
 
 ```{r}
+#everything() is a great tool when you do not know all the variables you're working with!!
+
 select(gapminder, continent, everything())
 ```
 
@@ -67,11 +69,10 @@ select(gapminder, continent, everything())
 
 ```{r}
 # compare
-select(gapminder, FILL_THIS_IN)
+select(gapminder, continent)
+rename(gapminder, cont=continent)
 
-rename(gapminder, FILL_THIS_IN)
 ```
-
 
 ## `arrange()` (8 min)
 
@@ -84,7 +85,7 @@ arrange(gapminder, year)
 2. Order by year, in descending order.
 
 ```{r}
-arrange(gapminder, FILL_THIS_IN)
+arrange(gapminder, -year)
 ```
 
 3. Order by year, then by life expectancy.
@@ -112,9 +113,13 @@ Now using with pipes:
 
 ```{r}
 # alter the below to include 2 "pipes"
+
 gapminder %>%
+  
   select(year,lifeExp,country)%>%
+  
   arrange(year,lifeExp)
+
 #arrange(select(gapminder, year, lifeExp, country), year, lifeExp)
 ```
 
@@ -157,6 +162,10 @@ Let's get:
 ```{r}
 gapminder %>%
   mutate(gdpBill = gdpPercap*pop/1000000000)
+
+#rounded to two decimals 
+gapminder %>% 
+  mutate(gdpbill=round((gdpPercap*pop/1000000000),2))
 ```
 
 Notice the backwards compatibility! No need for loops!
