@@ -77,13 +77,14 @@ ggplot(gapminder, aes(gdpPercap, lifeExp)) +
 - Use `shape=21` to distinguish between `fill` (interior) and `colour` (exterior). 
 
 ```{r, fig.width = 10, fig.height = 3}
-gapminder %>% 
+p<-gapminder %>% 
   filter(continent != "Oceania") %>% 
   ggplot(aes(gdpPercap, lifeExp, size=pop,fill= continent)) + #  color corresponds to the outline of the object where as fill corresponds to the inside of the object
   facet_wrap(~ continent, nrow=1) +
   geom_point(alpha = 0.4, shape=21) + #can add any shape object by using""
   scale_x_log10(labels = scales::comma_format())+
   scale_size_area()# to make the point density correspond to the pop density
+ggplotly(p)
   
 ```
 
@@ -93,7 +94,7 @@ A list of shapes can be found [at the bottom of the `scale_shape` documentation]
 
 Instead of alpha transparency, suppose you're wanting to fix the overplotting issue by plotting small points. Why is this not working? Fix it.
 
-```{r, fig.width = 5, fig.height = 2}
+```{r, fig.width = 10, fig.height = 5}
 ggplot(gapminder) +
   geom_point(aes(gdpPercap, lifeExp, size = 0.1)) +
   scale_x_log10(labels = scales::dollar_format())
@@ -101,7 +102,7 @@ ggplot(gapminder) +
 
 
 
-## Exercise 4: Walking caribou
+##?????? Exercise 4: Walking caribou 
 
 The following mock data set marks the (x,y) position of a caribou at four time points. 
 
@@ -119,6 +120,7 @@ tribble(
 ) %>% 
   ggplot(aes(x, y)) + 
   geom_line()
+
 ```
 
 ## Exercise 5: Life expectancies in Africa
@@ -174,7 +176,7 @@ Here's the number of people having a certain hair colour from a sample of 592 pe
 Fix the following bar plot so that it shows these counts.
 
 ```{r}
-ggplot(hair, aes(Hair, n)) +
+ggplot(hair, aes(hair)) +
   geom_bar()
 ```
 
@@ -190,7 +192,7 @@ Here's the number of people having a certain hair and eye colour from a sample o
 Fix the following plot so that it shows a filled-in square for each combination. 
 
 ```{r}
-ggplot(hair_eye, aes(Hair, Eye)) +
+ggplot(hair_eye, aes(Hair, Eye), shape = 15) +
   geom_point(aes(colour = n))
 ```
 
@@ -200,7 +202,7 @@ By the way, `geom_count()` is like `geom_bar()`: it counts the number of overlap
 ## Additional take-home practice
 
 If you'd like some practice, give these exercises a try
-
+  
 __Exercise 1__: Make a plot of `year` (x) vs `lifeExp` (y), with points coloured by continent. Then, to that same plot, fit a straight regression line to each continent, without the error bars. If you can, try piping the data frame into the `ggplot()` function.
 
 __Exercise 2__: Repeat Exercise 1, but switch the _regression line_ and _geom\_point_ layers. How is this plot different from that of Exercise 1?
