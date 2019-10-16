@@ -15,7 +15,10 @@ knitr::opts_chunk$set(error = TRUE, warning = FALSE)
 ```{r}
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(lubridate))
 suppressPackageStartupMessages(library(tsibble))
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(DT))
 ```
 
 
@@ -34,18 +37,12 @@ gapminder %>%
 
 2. Calculate the growth in population since the first year on record _for each country_ by rearranging the following lines, and filling in the `FILL_THIS_IN`. Here's another convenience function for you: `dplyr::first()`. 
 
-```
-
-
- 
-
-```
 
 ```{r}
 gapminder %>%
   group_by(country) %>% 
   arrange(year) %>% 
-  mutate(rel_growth = pop-first(pop)) %>%
+  mutate(rel_growth = pop-first(pop)) %>% #first() fucntion is useful when one wantss to work with incremental operations like growth, increase in, decrease in, lag....
   DT::datatable()
 
   
@@ -68,7 +65,6 @@ gapminder %>%
   filter(inc_life_exp == min(inc_life_exp)) %>% 
   arrange(inc_life_exp) %>% 
   knitr::kable()
-
 
 ```
 
