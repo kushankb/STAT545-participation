@@ -1,7 +1,8 @@
 ---
 title: "Tibble Exploration"
-output: html_document
-    
+output:
+  pdf_document: default
+
 ---
 ```{r load, warning=FALSE, echo=FALSE}
 library(tibble)
