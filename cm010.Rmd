@@ -55,15 +55,15 @@ The package `singer` comes with two smallish data frames about songs. Let's take
 1. We really care about the songs in `time`. But, which of those songs do we know its corresponding album?
 
 ```{r}
-time %>% 
-  semi_join(album,by = c("song","artist_name") 
+time%>% 
+  semi_join(album, by = c("song", "artist_name")) 
 ```
 
 2. Go ahead and add the corresponding albums to the `time` tibble, being sure to preserve rows even if album info is not readily available.
 
 ```{r}
 time %>% 
-  left_join(album, by = c("song","artist_name")) 
+  left_join(album, by = c("song","artist_name"))
 # add information to your base tibble (albun) if there is any information available in the second tibble, otherwise add NA
 ```
 
@@ -78,7 +78,7 @@ time %>%
 
 ```{r}
 time %>% 
-  anti_join(album, by = "artist_name")) 
+  anti_join(album, by = "artist_name")
 ```
 
 
