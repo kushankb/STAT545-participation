@@ -14,16 +14,19 @@ output:
 knitr::opts_chunk$set(error = TRUE)
 ```
 
-```{r, warning = FALSE, message = FALSE}
-library(tidyverse)
-lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/lotr_tidy.csv")
-guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
-email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
-```
 ```{r load packages, warning = FALSE, message = FALSE}
 # load your packages here:
 library(gapminder)
 library(tidyverse)
+library(dplyr)
+library(forcats)
+library(ggplot2)
+```
+
+```{r, warning = FALSE, message = FALSE}
+lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/lotr_tidy.csv")
+guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
+email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
 ```
 
 ## Motivating the need for factors in R
@@ -54,6 +57,7 @@ gapminder %>%
   labs(y = "GDP per capita, $", x= "Life expectancy level, years") +
   theme_bw() 
 ```
+
 
 Do you notice anything odd/wrong about the graph?
 
@@ -94,8 +98,9 @@ Use functions such as `str()`, `levels()`, `nlevels()` and `class()` to answer t
 - What integer is used to represent factor "Asia"?
 
 ```{r}
-gapminder$continent %>% 
-  levels()
+class(gapminder$continent)
+levels(gapminder$continent)
+nlevels(gapminder$continent)
 
 ```
 
@@ -111,9 +116,11 @@ Answer the following questions:
 ```{r}
 gapminder$country %>% 
   nlevels()
-new_countries<-gapminder %>% 
-  filter(country==c("India", "Mexico","Canada", "Japan","Spain"))
-
+new_countries<- gapminder %>% 
+filter(country==c("India", "Mexico","Canada", "Japan","Spain"))
+lev<-gapminder %>% 
+  filter(country %in% new_countries)
+nlevels(lev$country)
 ```
 
 ## Dropping unused levels
@@ -125,6 +132,7 @@ The function `droplevels()` operates on all the factors in a data frame or on a 
 ```{r}
 h_gap_dropped <- new_countries %>% 
   droplevels()
+nlevels(h_gap_dropped$country)
 
 
 ```
@@ -169,7 +177,7 @@ For instance ,
 ```{r}
 gapminder %>%
   ggplot() +
-  geom_bar(aes(fct_infreq(continent))) + #Fct_infreq used to sort the data!!
+  geom_bar(aes(fct_rev(fct_infreq(continent)))) + #Fct_infreq used to sort the data!!
   coord_flip() +
   theme_bw() +
   ylab("Number of entries") + xlab("Continent")
